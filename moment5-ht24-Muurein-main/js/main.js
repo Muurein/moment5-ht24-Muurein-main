@@ -17,6 +17,7 @@ document.getElementById("shownumrows").style.display = "none"; // Radera denna r
             1ac. lägg till under mainnavlist.appendChild
             1ad. lägg till under mainnav.appendChild?????
         1b. förs muspekaren över ska (("hover", function)???) ska en info-rutan dyka upp med info om kanalen. Ska läsas in från Sveriges Radois rest-webbtjäsnt - 2.01 i videon
+            https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
     2. klickar man på en kanal ska man se en tablå över kanalens program som inte redan har gått (bara dagens fram till midnatt - date-objekt, getDate, getHour(?)). Följande info om programmet ska finnas med:
         2a. titel
         2b. undertitel (om det finns), ska annars inte visas och *ska inte dyka upp ett felmeddelande*
@@ -43,8 +44,7 @@ function getChannels() {
     //turn the response into JSON
     .then(response => response.json())
     //från Malins övning - vill få ut värdet ur nycklarna, dock var det variabler så det kanske inte funkar
-    //.then(data => writeChannels(Object.keys(data)(data.channels)))
-    .then(data => console.log(data))
+    .then(data => writeChannels(Object.keys(data.channels)))
     //in case something goes wrong
     .catch(error => console.log("There was an error " + error))
 }
@@ -52,7 +52,29 @@ function getChannels() {
 
 
 
-//1ac + 1ad - write out the channels under <ul id="mainnavlist">
+//1ac + 1ad + 1b? - write out the channels under <ul id="mainnavlist">
+function writeChannels(channels) {
+    //get the HTML-element where I want to write out the channels
+    const channelsEl = document.getElementById("mainnavlist");
+
+
+    //loops through to create the list of channels
+    channels.forEach(channel => {
+        //creates the list item
+        const itemEl = document.createElement("li");
+
+        itemEl.value = channel;
+
+        //add text(value)
+        itemEl.textContent = channel;
+
+        channelsEl.appendChild(itemEl);
+
+        //BEHÖVER FÅ UT KANALNAMN SÅ KEYS I GETCHANNELS ÄR KANSKE FEL??
+
+    })
+    
+}
 
 
 
