@@ -81,7 +81,7 @@ function writeTVTable(schedule) {
     //get div-element where the table will be written out
     let tableEl = document.getElementById("info");
 
-    //loops through and adds elements <article><h2>title</h2><h4>subtitle</h4><p>description</p></article>
+    //loops through and adds elements <article><h2>title</h2><h4>subtitle</h4><p>description</p><div>hours:miuntes - hours:minutes</div></article>
     schedule.forEach(episode => {
         //convert endtimeutc to JavaScript-date to be able to handle it
         let episodeEndDateTime = episode.endtimeutc.replace(/\D/g, ''); //replaces everything that isn't numbers in string
