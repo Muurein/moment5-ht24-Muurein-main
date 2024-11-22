@@ -7,39 +7,19 @@
 document.getElementById("player").style.display = "none";      // Radera denna rad för att visa musikspelare
 document.getElementById("shownumrows").style.display = "none"; // Radera denna rad för att visa antal träffar
 
-/* Här under börjar du skriva din JavaScript-kod */
-/*
-    PLANERING
-    1. Skapa sidomeny
-        1a. window.onload init:
-            1aa. getElementById mainnavlist
-            1ab. skapa 10 li-element med olika namn/värden, ska läsas in från Sveriges Radios rest-webbtjänst
-            1ac. lägg till under mainnavlist.appendChild
-            1ad. lägg till under mainnav.appendChild?????
-        1b. förs muspekaren över ska (("hover", function)???) ska en info-rutan dyka upp med info om kanalen. Ska läsas in från Sveriges Radois rest-webbtjäsnt - 2.01 i videon
-            https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
-    2. Skapa tablå ¨
-        2a. klickar man på en kanal ska man se en tablå över kanalens program som inte redan har gått (bara dagens fram till midnatt - date-objekt, getDate, getHour(?)). Följande info om programmet ska finnas med:
-            2aa. titel
-            2ab. undertitel (om det finns), ska annars inte visas och *ska inte dyka upp ett felmeddelande*
-            2ac. sändnigstid
-            2ad. info om programmet
-        2b. ska bara kunna se kanalens program som inte redan har gått (bara dagens fram till midnatt - date-objekt, getDate, getHour(?))
-            
-*/
 
-//1a when the page loads
+//when the page loads
 window.onload = init;
 
 
 
 
-//1a - gets and shows a list of the channels when the page loads 
+//gets and shows a list of the channels when the page loads 
 function init() {
     getChannels();
 }
 
-//1aa + 1ab - get channels to be able to show them in the list
+//get channels to be able to show them in the list
 function getChannels() {
     //stores the url, changes the recieved data to JSON
     const url = "http://api.sr.se/api/v2/channels?format=json";
@@ -48,13 +28,13 @@ function getChannels() {
     fetch(url)
         //turn the response into JSON
         .then(response => response.json())
-        //gets the data
+        //get the data
         .then(data => {writeChannels(data.channels)})
         .catch(error => console.log("There was an error " + error))
 
     }
 
-//1ac + 1ad + 1b
+//write out channels
 function writeChannels(channels) {
 
     //get the HTML-element where I want to write out the channels
@@ -62,7 +42,7 @@ function writeChannels(channels) {
 
     //loops through the given array to create the list of channels
     channels.forEach(channel => {
-         //creates the list item and adds the "hovering-box"
+         //creates the list item and adds the information-box (visible when mouse hovers over)
         let channelLiEl = document.createElement("li");
         let listTextEl = document.createTextNode(channel.name);
         channelLiEl.setAttribute("title", channel.tagline);
@@ -76,14 +56,10 @@ function writeChannels(channels) {
         
        
     })
-    //channelsEl.addEventListener("click", getTVTable); //förut var det getTableP1
 }
 
 
-
-
-
-//pre-2 - get the channel programs
+//get the channel programs
 function getTVTable(channelId) {
     const url = `http://api.sr.se/api/v2/scheduledepisodes?channelid=${channelId}&format=json&pagination=false`; 
     console.log(channelId);
@@ -93,16 +69,15 @@ function getTVTable(channelId) {
     fetch(url)
         //turn the response into JSON
         .then(response => response.json())
-        //från Malins övning - vill få ut värdet ur nycklarna, dock var det variabler så det kanske inte funkar - VALUES ÄR FEL
-        //.then(data => writeChannels(Object.keys(data.channels))) //KAN OCKSÅ TESTA BARA SKRIVA .then(data => writeChannels.data), får inga siffror bara [object object] .then(data => console.log(data.channels))
+        //get data
         .then(data => {writeTVTable(data.schedule)})
-        //.catch(error => console.log("There was a schedule error " + error))
+        .catch(error => console.log("There was a schedule error " + error))
 }
 
 
 
 
-//2aa + 2ab + 2ac + 2ad write out the channel programs
+//write out the channel programs
 function writeTVTable(schedule) {
     //get div-element where the table will be written out
     let tableEl = document.getElementById("info");
@@ -118,7 +93,7 @@ function writeTVTable(schedule) {
             return;
         }
     
-        
+        //article to have somewhere to store the different programs
         let articleEl = document.createElement("article");
 
         //title h2
@@ -153,8 +128,9 @@ function writeTVTable(schedule) {
     })
 }
 
+//get date
 function getDateAndTime(dateStr) {
-    //convert endtimeutc to JavaScript-date to be able to handle it
+    //convert endtimeutc to JavaScript-date to be able to handle it, right now it is in the format of unix timestamp
     let onlyNumbers = dateStr.replace(/\D/g, ''); //replaces everything that isn't numbers in string
     onlyNumbers = parseInt(onlyNumbers); //converts unix-timestamp-string to numbers
 
