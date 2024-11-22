@@ -22,7 +22,7 @@ function init() {
 //get channels to be able to show them in the list
 function getChannels() {
     //stores the url, changes the recieved data to JSON
-    const url = "http://api.sr.se/api/v2/channels?format=json";
+    const url = "https://api.sr.se/api/v2/channels?format=json";
 
     //fetch - calls for the url
     fetch(url)
@@ -61,7 +61,7 @@ function writeChannels(channels) {
 
 //get the channel programs
 function getTVTable(channelId) {
-    const url = `http://api.sr.se/api/v2/scheduledepisodes?channelid=${channelId}&format=json&pagination=false`; 
+    const url = `https://api.sr.se/api/v2/scheduledepisodes?channelid=${channelId}&format=json&pagination=false`; 
     clearTVTable();
 
     //fetch - calls for the url
