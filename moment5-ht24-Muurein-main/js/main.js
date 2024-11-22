@@ -62,7 +62,6 @@ function writeChannels(channels) {
 //get the channel programs
 function getTVTable(channelId) {
     const url = `http://api.sr.se/api/v2/scheduledepisodes?channelid=${channelId}&format=json&pagination=false`; 
-    console.log(channelId);
     clearTVTable();
 
     //fetch - calls for the url

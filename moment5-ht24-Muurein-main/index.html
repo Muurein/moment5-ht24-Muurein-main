@@ -13,9 +13,7 @@
             <h1 id="logo">DT084G - Moment 5</h1>
 
             <section id="player">
-                <!-- BORT select-element för radiokanaler -->
                 <select id="playchannel" class="form-control"></select>
-                <!-- BORT knapp för att starta uppspelning av radio-kanaler -->
                 <button id="playbutton" class="btn btn-primary">Spela</button>
             </section>
             <!-- /#search -->
@@ -28,12 +26,9 @@
         <div class="left">
             <section class="clist">
                 <h3>Bläddra via kanal</h3>
-                <!-- BORT huvudmeny i vänsterkanten -->
                 <nav id="mainnav">
-                    <!-- BORT kanallista -->
                     <ul id="mainnavlist"></ul>
                     <div class="spacer" id="shownumrows">
-                        <!-- BORT numrows -> antal-väljare för att kunna välja antal kanaler i huvudmenyn. Returnerar heltal från 1 till 2000, standard är 10 -->
                         <label for="numrows">Max antal: </label><input type="number" id="numrows" value="10" min="1" max="2000">&nbsp;&nbsp;
                     </div>
                 </nav>
@@ -43,7 +38,6 @@
         <!-- /.left -->
 
         <div class="right">
-            <!-- BORT här skrivs program-tablåer ut -->
             <div id="info"></div>
             <!-- /#info -->
         </div>
@@ -51,7 +45,6 @@
 
         <footer>
             <p>Uppgift för kursen DT084G, Introduktion till programmering med JavaScript.</p>
-            <!-- BORT lämplig att använda för (valfri) radio-spelar -->
             <div id="radioplayer"></div>
         </footer>
     </div>
